@@ -1,6 +1,7 @@
 package org.emerjoin.arqiva.web;
 
 import org.emerjoin.arqiva.core.Arqiva;
+import org.emerjoin.arqiva.core.tree.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +48,19 @@ public class ArqivaRunServlet extends HttpServlet {
     private void renderIndexPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-       String templatePageHtml =  arqivaInstance.renderIndexPage();
-       writeHtml(templatePageHtml,resp);
+        String startPoint = arqivaInstance.getStartPoint();
+        String templatePageHtml = "";
 
+        if(startPoint.equals(Arqiva.START_POINT_INDEX)){
+            templatePageHtml =  arqivaInstance.renderIndexPage();
+        }else if(startPoint.equals(Arqiva.START_POINT_FIRST_TOPIC)){
+            TreeNode topic =  arqivaInstance.getProject().getTopicsTree().firstTopic();
+            templatePageHtml = arqivaInstance.renderTopicPage(topic.getRef().getUrl(),true);
+        }else{
+            templatePageHtml = arqivaInstance.renderTopicPage(startPoint,true);
+        }
+
+        writeHtml(templatePageHtml,resp);
 
     }
 
