@@ -48,7 +48,7 @@ public class ArqivaRunServlet extends HttpServlet {
     private void renderIndexPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String startPoint = arqivaInstance.getStartPoint();
+        String startPoint = Middleware.START_POINT;
         String templatePageHtml = "";
 
         if(startPoint.equals(Arqiva.START_POINT_INDEX)){
