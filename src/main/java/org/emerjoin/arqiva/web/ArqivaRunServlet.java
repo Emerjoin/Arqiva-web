@@ -44,11 +44,11 @@ public class ArqivaRunServlet extends HttpServlet {
 
             if (resourceRequested.startsWith(Middleware.TOPICS_DIRECTORY + "/"))
                 renderTopicPage(resourceRequested, req, resp);
-            else resp.sendError(404);
+            else resp.sendError(404,resourceRequested);
 
         }catch (TopicReferenceNotFoundException ex){
 
-            resp.sendError(404,ex.getMessage());
+            resp.sendError(404,resourceRequested);
 
         }
 
