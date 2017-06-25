@@ -82,6 +82,7 @@ public class ArqivaRunServlet extends HttpServlet {
         arqivaInstance = new Arqiva(Middleware.ARQIVA_PROJECT);
         log.info("Preparing Arqiva instance...");
         arqivaInstance.getReady();
+        arqivaInstance.getProject().getContext().setTopicsDirectory(Middleware.TOPICS_DIRECTORY);
 
     }
 
