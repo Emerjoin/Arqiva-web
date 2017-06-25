@@ -48,7 +48,7 @@ public class ArqivaRunServlet extends HttpServlet {
 
         }catch (TopicReferenceNotFoundException ex){
 
-            resp.sendError(404,ex.getMessage();
+            resp.sendError(404,ex.getMessage());
 
         }
 
