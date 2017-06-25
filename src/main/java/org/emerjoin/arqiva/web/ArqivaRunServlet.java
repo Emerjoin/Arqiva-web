@@ -1,6 +1,7 @@
 package org.emerjoin.arqiva.web;
 
 import org.emerjoin.arqiva.core.Arqiva;
+import org.emerjoin.arqiva.core.exception.TopicReferenceNotFoundException;
 import org.emerjoin.arqiva.core.tree.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,9 +40,17 @@ public class ArqivaRunServlet extends HttpServlet {
             return;
         }
 
-        if(resourceRequested.startsWith("topics/"))
-            renderTopicPage(resourceRequested,req,resp);
-        else resp.sendError(404);
+        try {
+
+            if (resourceRequested.startsWith(Middleware.TOPICS_DIRECTORY + "/"))
+                renderTopicPage(resourceRequested, req, resp);
+            else resp.sendError(404);
+
+        }catch (TopicReferenceNotFoundException ex){
+
+            resp.sendError(404,ex.getMessage();
+
+        }
 
     }
 
